@@ -1,10 +1,12 @@
 package com.tarbiyah.dto;
 
-import com.tarbiyah.entity.User;
+
 
 public class AuthenticationResponse {
     private int statusCode;
 	private String message;
+	private String accessToken;
+	private String refreshToken;
     private UserDTO user;
 	
 	public AuthenticationResponse() {
@@ -14,12 +16,21 @@ public class AuthenticationResponse {
 	
 	
 
-	public AuthenticationResponse(String message,int statusCode,UserDTO user) {
+	
+
+	public AuthenticationResponse(int statusCode, String message, String accessToken, String refreshToken,
+			UserDTO user) {
 		super();
-		this.message = message;
 		this.statusCode = statusCode;
-		this.user=user;
+		this.message = message;
+		this.accessToken = accessToken;
+		this.refreshToken = refreshToken;
+		this.user = user;
 	}
+
+
+
+
 
 	public String getMessage() {
 		return message;
@@ -37,6 +48,40 @@ public class AuthenticationResponse {
 		this.statusCode = statusCode;
 	}
 	
+	
+	
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+
+
+
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
+
+
+
+
+	public String getRefreshToken() {
+		return refreshToken;
+	}
+
+
+
+
+
+	public void setRefreshToken(String refreshToken) {
+		this.refreshToken = refreshToken;
+	}
+
+
+
+
+
 	public UserDTO getUser() {
 		return user;
 	}

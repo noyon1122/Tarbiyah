@@ -2,6 +2,12 @@ package com.tarbiyah.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,12 +16,14 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails{
 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -34,13 +42,16 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	private LocalDateTime createAt;
+	@OneToMany(mappedBy = "user")
+	private List<Token> tokens;
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	public User(Long id, String firstName, String lastName, String username, String email, String password,
 			String mobile, String gender, String imageUrl, LocalDate dob, String address, Boolean isActive, Role role,
-			LocalDateTime createAt) {
+			LocalDateTime createAt, List<Token> tokens) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -56,7 +67,9 @@ public class User {
 		this.isActive = isActive;
 		this.role = role;
 		this.createAt = createAt;
+		this.tokens = tokens;
 	}
+
 	public Long getId() {
 		return id;
 	}
@@ -76,7 +89,7 @@ public class User {
 		this.lastName = lastName;
 	}
 	public String getUsername() {
-		return username;
+		return email;
 	}
 	public void setUsername(String username) {
 		this.username = username;
@@ -140,6 +153,40 @@ public class User {
 	}
 	public void setCreateAt(LocalDateTime createAt) {
 		this.createAt = createAt;
+	}
+	
+	public List<Token> getTokens() {
+		return tokens;
+	}
+
+	public void setTokens(List<Token> tokens) {
+		this.tokens = tokens;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		
+		return List.of(new SimpleGrantedAuthority("ROLE_"+this.role.name()));
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+		
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+		
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+		
+		return true;
+	}
+	@Override
+	public boolean isEnabled() {
+		
+		return true;
 	}
 	@Override
 	public String toString() {
