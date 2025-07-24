@@ -36,4 +36,6 @@ public class AuthController {
 		AuthenticationResponse response=authService.login(loginRequest);
 		return ResponseEntity.ok(response);
 	}
+	
+	
 }

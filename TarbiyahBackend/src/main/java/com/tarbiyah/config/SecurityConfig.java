@@ -1,7 +1,5 @@
 package com.tarbiyah.config;
 
-
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -26,13 +25,14 @@ public class SecurityConfig {
 	
     private final CustomUserDetailsService userDetailsService;
     private final JwtFilter jwtFilter;
-    
+    private final CustomLogoutHandler logoutHandler;
     
 
-	public SecurityConfig(CustomUserDetailsService userDetailsService,JwtFilter jwtFilter) {
+	public SecurityConfig(CustomUserDetailsService userDetailsService,JwtFilter jwtFilter,CustomLogoutHandler logoutHandler) {
 		super();
 		this.userDetailsService = userDetailsService;
 		this.jwtFilter=jwtFilter;
+		this.logoutHandler=logoutHandler;
 	}
    
 	@Bean
@@ -52,6 +52,10 @@ public class SecurityConfig {
 				.userDetailsService(userDetailsService)
 				.sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+				.logout(l->l
+						.logoutUrl("/logout")
+						.addLogoutHandler(logoutHandler)
+						.logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext()))
 				.build();
 				
 	}
