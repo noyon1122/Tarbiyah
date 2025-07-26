@@ -59,7 +59,8 @@ public class AuthService implements IAuthService {
 			}
 			user.setPassword(passwordEncoder.encode(user.getPassword()));
 			user.setCreateAt(LocalDateTime.now());
-	        //save user 
+			user.setIsActive(true);
+			//save user 
 			User savedUser=userRepository.save(user);
 			UserDTO userDTO = Utils.mapUserEntityToUserDTO(savedUser);
 			String accessToken=jwtService.generateAccessToken(savedUser);
@@ -94,11 +95,13 @@ public class AuthService implements IAuthService {
 			User user=userRepository.findByEmail(loginRequest.getEmail()).orElseThrow(()->new CustomException("Opps Sorru!! User not found"));
 			String accessToken=jwtService.generateAccessToken(user);
 			String refreshToken=jwtService.generateRefreshToken(user);
+			UserDTO userDTO = Utils.mapUserEntityToUserDTO(user);
 			invalidAllUserToken(user);
 			savedUserToken(accessToken,refreshToken, user);
 			response.setAccessToken(accessToken);
 			response.setRefreshToken(refreshToken);
 			response.setStatusCode(200);
+			response.setUser(userDTO);
 			response.setMessage("User login successfully!!");
 		}catch (CustomException e) {
 			response.setStatusCode(404);

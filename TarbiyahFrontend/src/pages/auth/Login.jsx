@@ -1,23 +1,56 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { login } from '../../services/api';
 
 const Login = () => {
+ const navigate=useNavigate();
+    const [form, setForm] = useState({
+   
+    email: "",
+    password: "",
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+     const updatedForm = { ...form, [name]: value };
+    setForm(updatedForm);
+  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+   const { decodedToken, user } = await login(form); // now returns decoded token
+    console.log("Decoded token:", decodedToken);
+    const role = user?.role; // 👈 adjust this based on your token payload
+    
+    if (!role) {
+      alert("User role is not defined.");
+      return;
+    }
+    if (role === "ADMIN") navigate("/admin/dashboard");
+    else if (role === "TEACHER") navigate("/teacher/dashboard");
+    else navigate("/student/dashboard");
+
+    alert("Login successful!");
+  } catch (err) {
+    alert("Login failed");
+  }
+};
+
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Sign in to your account
         </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
+        <div className="mt-2 text-center text-sm text-gray-600">
           Or{" "}
-          <a href="#" className="font-medium text-cyan-600 hover:text-cyan-500">
-            create an account
-          </a>
-        </p>
+       
+           <Link to="/register"><div className="font-medium text-cyan-600 hover:text-cyan-500">Create an account</div></Link>
+        </div>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email address
@@ -31,6 +64,7 @@ const Login = () => {
                   required
                   placeholder="Enter your email address"
                   className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  value={form.email} onChange={handleChange}
                 />
               </div>
             </div>
@@ -48,6 +82,7 @@ const Login = () => {
                   required
                   placeholder="Enter your password"
                   className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                value={form.password} onChange={handleChange}
                 />
               </div>
             </div>
@@ -56,7 +91,7 @@ const Login = () => {
               <div className="flex items-center">
                 <input
                   id="remember_me"
-                  name="remember_me"
+                 
                   type="checkbox"
                   className="h-4 w-4 text-cyan-600 focus:ring-cyan-500 border-gray-300 rounded"
                 />
