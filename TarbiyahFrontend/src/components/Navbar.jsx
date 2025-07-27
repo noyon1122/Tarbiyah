@@ -3,7 +3,7 @@ import logo from '../assets/images/logo.png'
 import { Link } from 'react-router-dom'
 const Navbar = () => {
   return (
-    <div className="flex items-center justify-between bg-base-100 shadow-sm text-lg font-medium container  mx-auto">
+    <div className="flex items-center justify-between font-fredoka bg-base-100 shadow-sm text-lg font-medium container  mx-auto px-4">
   <div>
     <Link to={'/'}>
       <img className="w-36 h-20" src={logo} alt="Logo" />

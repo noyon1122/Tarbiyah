@@ -5,7 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+     extend: {
+      fontFamily: {
+        fredoka: ['"Fredoka"', 'sans-serif'],
+        patrick: ['"Patrick Hand"', 'cursive'],
+        roboto: ['"Roboto"', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }
