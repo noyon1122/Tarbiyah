@@ -42,8 +42,14 @@ public class User implements UserDetails{
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	private LocalDateTime createAt;
+	
 	@OneToMany(mappedBy = "user")
 	private List<Token> tokens;
+	
+	@OneToMany(mappedBy = "teacher")
+	private List<Course> courses;
+	@OneToMany(mappedBy = "student")
+	private List<Enrollment> enrollments;
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
