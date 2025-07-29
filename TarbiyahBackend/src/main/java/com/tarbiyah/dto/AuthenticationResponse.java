@@ -1,6 +1,6 @@
 package com.tarbiyah.dto;
 
-
+import java.util.List;
 
 public class AuthenticationResponse {
     private int statusCode;
@@ -8,28 +8,24 @@ public class AuthenticationResponse {
 	private String accessToken;
 	private String refreshToken;
     private UserDTO user;
+    private List<UserDTO>userList;
 	
 	public AuthenticationResponse() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	
 
-	
-
-	public AuthenticationResponse(int statusCode, String message, String accessToken, String refreshToken,
-			UserDTO user) {
+	public AuthenticationResponse(int statusCode, String message, String accessToken, String refreshToken, UserDTO user,
+			List<UserDTO> userList) {
 		super();
 		this.statusCode = statusCode;
 		this.message = message;
 		this.accessToken = accessToken;
 		this.refreshToken = refreshToken;
 		this.user = user;
+		this.userList = userList;
 	}
-
-
-
 
 
 	public String getMessage() {
@@ -48,14 +44,9 @@ public class AuthenticationResponse {
 		this.statusCode = statusCode;
 	}
 	
-	
-	
 	public String getAccessToken() {
 		return accessToken;
 	}
-
-
-
 
 
 	public void setAccessToken(String accessToken) {
@@ -63,23 +54,14 @@ public class AuthenticationResponse {
 	}
 
 
-
-
-
 	public String getRefreshToken() {
 		return refreshToken;
 	}
 
 
-
-
-
 	public void setRefreshToken(String refreshToken) {
 		this.refreshToken = refreshToken;
 	}
-
-
-
 
 
 	public UserDTO getUser() {
@@ -90,6 +72,15 @@ public class AuthenticationResponse {
 		this.user = user;
 	}
 
+
+	public List<UserDTO> getUserList() {
+		return userList;
+	}
+
+
+	public void setUserList(List<UserDTO> userList) {
+		this.userList = userList;
+	}
 
 
 	@Override

@@ -33,6 +33,11 @@ export const login = async (loginData) => {
   return { decodedToken: jwtDecode(token), user: response.data.user };
 };
 
+export const getTeachers=async()=>{
+  const response=await api.get('/api/teachers?role=TEACHER');
+  return response.data;
+}
+
 
 
 export default api;

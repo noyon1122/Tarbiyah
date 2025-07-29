@@ -1,6 +1,7 @@
 package com.tarbiyah.service.Impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -12,28 +13,44 @@ import com.tarbiyah.repository.UserRepository;
 import com.tarbiyah.service.IUserService;
 import com.tarbiyah.util.Utils;
 
+
 @Service
 
 public class UserService implements IUserService {
 	
+	
+
 	private final UserRepository userRepository;
 
 	public UserService(UserRepository userRepository) {
 		super();
 		this.userRepository = userRepository;
 	}
-
+	
 	@Override
-	public List<User> findTeachers(Role role) {
-
-		List<User> teachersList=userRepository.findTop6ByRoleOrderByCreateAtDesc(role);
-		return teachersList;
+	public AuthenticationResponse findTeachers(Role role) {
+		
+		AuthenticationResponse response=new AuthenticationResponse();
+		
+		try {
+			List<User> teachers=userRepository.findAllByRole(role);
+			List<UserDTO> teachersDtos=Utils.mapUserListEntityToUserListDTO(teachers);
+			response.setStatusCode(200);
+			response.setUserList(teachersDtos);
+			response.setMessage("All Teachers Found Successfully!");
+			
+		} catch (Exception e) {
+			response.setStatusCode(404);
+			response.setMessage("Something went wrong! All teachers not found!!");
+		}
+		return response;
+	}
+	
+	@Override
+	public User findByEmail(String email) {
+		
+			return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found with email: " + email));
 	}
 
-
-
-	
-
-	
 
 }

@@ -42,8 +42,8 @@ public class SecurityConfig {
 				.csrf(AbstractHttpConfigurer::disable)
 				.cors(Customizer.withDefaults())
 				.authorizeHttpRequests(req->req
-						.requestMatchers("/auth/**","api/**").permitAll()
-						.requestMatchers("/admin/**").hasRole("ADMIN")
+						.requestMatchers("/auth/**","/api/teachers").permitAll()
+						.requestMatchers("/admin/**","/api/course/create").hasRole("ADMIN")
 						.requestMatchers("/teachers/**").hasAnyRole("ADMIN","TEACHER")
 						.requestMatchers("/students/**").hasAnyRole("ADMIN","TEACHER","STUDENT")
 						.anyRequest().authenticated()

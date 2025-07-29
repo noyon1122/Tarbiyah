@@ -1,5 +1,8 @@
 package com.tarbiyah.util;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.tarbiyah.dto.UserDTO;
 import com.tarbiyah.entity.User;
 
@@ -20,5 +23,9 @@ public class Utils {
 		userDTO.setIsActive(user.getIsActive());
 		userDTO.setRole(user.getRole());
 		return userDTO;
+	}
+	
+	public static List<UserDTO> mapUserListEntityToUserListDTO(List<User>userList){
+		return userList.stream().map(Utils::mapUserEntityToUserDTO).collect(Collectors.toList());
 	}
 }

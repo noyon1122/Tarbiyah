@@ -1,15 +1,14 @@
 package com.tarbiyah.controller;
 
-import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tarbiyah.dto.AuthenticationResponse;
 import com.tarbiyah.entity.Role;
-import com.tarbiyah.entity.User;
+
 import com.tarbiyah.service.Impl.UserService;
 
 @RestController
@@ -28,9 +27,11 @@ public class UserController {
 
 
 	@GetMapping("/teachers")
-	public ResponseEntity<List<User>> findTeachers(@RequestBody Role role){
-		List<User> teachers=userService.findTeachers(role);
+	public ResponseEntity<AuthenticationResponse> findTeachers(@RequestParam Role role){
+	
 		
-		return null;
+		AuthenticationResponse response=userService.findTeachers(role);
+		
+		return ResponseEntity.ok(response);
 	}
 }

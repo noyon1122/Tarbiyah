@@ -26,6 +26,7 @@ public class Course {
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private Boolean popular;
+	private LocalDate createDate;
 
 	
 	@ManyToOne
@@ -39,8 +40,11 @@ public class Course {
 	}
 
 
+
+
+
 	public Course(Long id, String title, String description, Integer fee, Integer startAge, Integer endAge,
-			LocalDate startDate, LocalDate endDate, Boolean popular, User teacher) {
+			LocalDate startDate, LocalDate endDate, Boolean popular, LocalDate createDate, User teacher) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -51,8 +55,12 @@ public class Course {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.popular = popular;
+		this.createDate = createDate;
 		this.teacher = teacher;
 	}
+
+
+
 
 
 	public Long getId() {
@@ -153,6 +161,23 @@ public class Course {
 	public void setTeacher(User teacher) {
 		this.teacher = teacher;
 	}
+
+	
+
+	public LocalDate getCreateDate() {
+		return createDate;
+	}
+
+
+
+
+
+	public void setCreateDate(LocalDate createDate) {
+		this.createDate = createDate;
+	}
+
+
+
 
 
 	@Override
