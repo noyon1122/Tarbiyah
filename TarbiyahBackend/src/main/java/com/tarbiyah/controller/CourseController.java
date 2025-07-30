@@ -1,8 +1,10 @@
 package com.tarbiyah.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +30,7 @@ public class CourseController {
 		this.userService = userService;
 	}
 
-	@PostMapping("/course/create")
+	@PostMapping("/courses/create")
 	public ResponseEntity<Course> createCourse(@RequestBody Course course,Principal principal)
 	{
 		User admin=userService.findByEmail(principal.getName());
@@ -38,5 +40,17 @@ public class CourseController {
         }
         Course saved = courseService.createCourse(course);
         return ResponseEntity.ok(saved);
+	}
+	
+	@GetMapping("/course/popular")
+	public ResponseEntity<List<Course>> getPopularCourse(){
+		List<Course> courseList=courseService.getPopularCourse();
+		return ResponseEntity.ok(courseList);
+	}
+	
+	@GetMapping("/courses")
+	public ResponseEntity<List<Course>> getAllCourse(){
+		List<Course> allCourse=courseService.getAllCourse();
+		return ResponseEntity.ok(allCourse);
 	}
 }

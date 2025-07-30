@@ -38,6 +38,14 @@ export const getTeachers=async()=>{
   return response.data;
 }
 
+export const getPopularCourse= async()=>{
+  const response=await api.get('/api/courses/popular')
+  return response.data;
+}
 
 
+export const getAllCourse=async()=>{
+  const response=await api.get('/api/courses');
+  
+}
 export default api;

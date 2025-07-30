@@ -10,6 +10,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "../pages/student/Dashboard";
 import TeacherDashboard from "../pages/teacher/TeacherDashboard";
 import AdminDashboard from "../pages/admin/AdminDashboard";
+import Courses from "../pages/public/Courses";
 
 const router=createBrowserRouter([
     {
@@ -47,6 +48,10 @@ const router=createBrowserRouter([
             {
                 path:'/admin/dashboard',
                 element:<AdminDashboard></AdminDashboard>
+            },
+            {
+                path:'/courses',
+                element:<Courses></Courses>
             }
 
         ]

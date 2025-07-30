@@ -19,6 +19,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
 	//show popular course
 	List<Course>findByPopularTrue();
 	
+	
 	// Show newest courses for homepage
 	 @Query("SELECT c FROM Course c ORDER BY c.createDate DESC")
 	 List<Course> findTop10ByOrderByCreateDateDesc();

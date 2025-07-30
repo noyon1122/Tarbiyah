@@ -27,6 +27,7 @@ public class Course {
 	private LocalDate endDate;
 	private Boolean popular;
 	private LocalDate createDate;
+	private String imageUrl;
 
 	
 	@ManyToOne
@@ -40,11 +41,9 @@ public class Course {
 	}
 
 
-
-
-
 	public Course(Long id, String title, String description, Integer fee, Integer startAge, Integer endAge,
-			LocalDate startDate, LocalDate endDate, Boolean popular, LocalDate createDate, User teacher) {
+			LocalDate startDate, LocalDate endDate, Boolean popular, LocalDate createDate, String imageUrl,
+			User teacher) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -56,11 +55,9 @@ public class Course {
 		this.endDate = endDate;
 		this.popular = popular;
 		this.createDate = createDate;
+		this.imageUrl = imageUrl;
 		this.teacher = teacher;
 	}
-
-
-
 
 
 	public Long getId() {
@@ -150,6 +147,16 @@ public class Course {
 
 	public void setPopular(Boolean popular) {
 		this.popular = popular;
+	}
+
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 

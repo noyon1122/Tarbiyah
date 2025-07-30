@@ -1,5 +1,7 @@
 package com.tarbiyah.service.Impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.tarbiyah.entity.Course;
@@ -22,6 +24,20 @@ public class CourseService implements ICourseService {
 		
 		return courseRepository.save(course);
 	}
+
+	@Override
+	public List<Course> getAllCourse() {
+		// TODO Auto-generated method stub
+		return courseRepository.findAll();
+	}
+
+	@Override
+	public List<Course> getPopularCourse() {
+		
+		return courseRepository.findByPopularTrue();
+	}
+	
+	
 	
 
 }

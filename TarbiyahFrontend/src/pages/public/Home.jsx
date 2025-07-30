@@ -10,6 +10,7 @@ import support from '../../assets/images/support.png'
 import about from '../../assets/images/about.png'
 import writting from '../../assets/images/writting.png'
 import TeacherList from './TeacherList';
+import PopularCourse from './PopularCourse';
 const Home = () => {
 
   const commonBoxClass = "bg-slate-100 font-fredoka flex flex-col items-center text-center justify-center p-6 m-2 rounded shadow";
@@ -107,6 +108,7 @@ const Home = () => {
      </div>
 
      {/* Popular Classes */}
+     <PopularCourse></PopularCourse>
      {/* All teachers */}
      <TeacherList></TeacherList>
     </div>
