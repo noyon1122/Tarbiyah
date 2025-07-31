@@ -11,6 +11,12 @@ import about from '../../assets/images/about.png'
 import writting from '../../assets/images/writting.png'
 import TeacherList from './TeacherList';
 import PopularCourse from './PopularCourse';
+import piller from '../../assets/images/piller.png'
+import salah from '../../assets/images/salah.png'
+import haz from '../../assets/images/haz.png'
+import sahadah from '../../assets/images/sahada.png'
+import jakat from '../../assets/images/jakat.png'
+import sawm from '../../assets/images/salah.png'
 const Home = () => {
 
   const commonBoxClass = "bg-slate-100 font-fredoka flex flex-col items-center text-center justify-center p-6 m-2 rounded shadow";
@@ -111,7 +117,48 @@ const Home = () => {
      <PopularCourse></PopularCourse>
      {/* All teachers */}
      <TeacherList></TeacherList>
+
+     {/* Five Piller of Islam */}
+
+     <div className="relative w-full h-96">
+  {/* Background Pillar Image */}
+  <img src={piller} alt="Pillar background" className="w-full h-96 object-cover" />
+
+  {/* Overlay Content */}
+  <div className="absolute inset-0 flex flex-col items-center justify-center text-white bg-black bg-opacity-40">
+    <h1 className="text-4xl font-bold mb-6">Five Pillars of Islam</h1>
+    
+    <div className="grid grid-cols-5 gap-20 text-center">
+      <div>
+        <img src={sahadah} alt="Shahadah" className="w-32 h-32 mx-auto transition-transform duration-300 hover:scale-110" />
+        <h2 className="mt-2 text-xl font-semibold">Shahadah</h2>
+      </div>
+      <div>
+        <img src={salah} alt="Salah" className="w-32 h-32 mx-auto transition-transform duration-300 hover:scale-110"  />
+        <h2 className="mt-2 text-xl font-semibold">Salah</h2>
+      </div>
+      <div>
+        <img src={jakat} alt="Zakaat" className="w-32 h-32 mx-auto transition-transform duration-300 hover:scale-110" />
+        <h2 className="mt-2 text-xl font-semibold">Zakaat</h2>
+      </div>
+      <div>
+        <img src={sawm} alt="Sawm" className="w-32 h-32 mx-auto transition-transform duration-300 hover:scale-110" />
+        <h2 className="mt-2 text-xl font-semibold">Sawm</h2>
+      </div>
+      <div>
+        <img src={haz} alt="Hajj" className="w-32 h-32 mx-auto transition-transform duration-300 hover:scale-110" />
+        <h2 className="mt-2 text-xl font-semibold">Hajj</h2>
+      </div>
     </div>
+    <div className='mx-20 my-6'>
+      Islam is a religion that is based on a set of core beliefs and practices, known as the Five Pillars of Islam. These five practices are considered essential to the faith and form the foundation for a Muslim's spiritual life. In this article, we will explore each of the Five Piller And What They Represent.
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    
   )
 }
 
