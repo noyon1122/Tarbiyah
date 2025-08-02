@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { login } from '../../services/api';
+import { loginApi } from '../../services/api';
+import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
- const navigate=useNavigate();
+   const {login}=useAuth();
+    const navigate=useNavigate();
     const [form, setForm] = useState({
    
     email: "",
@@ -17,10 +19,10 @@ const Login = () => {
  const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-   const { decodedToken, user } = await login(form); // now returns decoded token
-    console.log("Decoded token:", decodedToken);
-    const role = user?.role; // 👈 adjust this based on your token payload
-    
+   const  {token,user}= await loginApi(form); // now returns decoded token
+    login(token,user);
+    // ✅ This is correct
+   const role=user?.role;
     if (!role) {
       alert("User role is not defined.");
       return;

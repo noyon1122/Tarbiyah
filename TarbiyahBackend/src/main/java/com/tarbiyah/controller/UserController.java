@@ -26,11 +26,10 @@ public class UserController {
 
 
 
-	@GetMapping("/teachers")
+	@GetMapping("/users")
 	public ResponseEntity<AuthenticationResponse> findTeachers(@RequestParam Role role){
 	
-		
-		AuthenticationResponse response=userService.findTeachers(role);
+		AuthenticationResponse response=userService.findUsers(role);
 		
 		return ResponseEntity.ok(response);
 	}

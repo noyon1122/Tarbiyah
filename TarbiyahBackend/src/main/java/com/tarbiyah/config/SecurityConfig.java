@@ -42,7 +42,7 @@ public class SecurityConfig {
 				.csrf(AbstractHttpConfigurer::disable)
 				.cors(Customizer.withDefaults())
 				.authorizeHttpRequests(req->req
-						.requestMatchers("/auth/**","/api/teachers","/api/courses/**").permitAll()
+						.requestMatchers("/auth/**","/api/users","/api/course/popular").permitAll()
 						.requestMatchers("/admin/**","/api/course/create").hasRole("ADMIN")
 						.requestMatchers("/teachers/**").hasAnyRole("ADMIN","TEACHER")
 						.requestMatchers("/students/**").hasAnyRole("ADMIN","TEACHER","STUDENT")

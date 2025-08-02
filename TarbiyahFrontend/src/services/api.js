@@ -20,7 +20,7 @@ export const register=async(userData) => {
 
 }
 
-export const login = async (loginData) => {
+export const loginApi = async (loginData) => {
   const response = await api.post('/auth/login', loginData);
 
   const token = response.data.accessToken;
@@ -28,24 +28,33 @@ export const login = async (loginData) => {
     throw new Error("Invalid token format from backend.");
   }
 
-  localStorage.setItem('token', token);
-
-  return { decodedToken: jwtDecode(token), user: response.data.user };
+  return { token: token, user: response.data.user };
 };
 
 export const getTeachers=async()=>{
-  const response=await api.get('/api/teachers?role=TEACHER');
+  const response=await api.get('/api/users?role=TEACHER');
+  return response.data;
+}
+
+export const getStudents=async()=>{
+  const response=await api.get('/api/users?role=STUDENT');
   return response.data;
 }
 
 export const getPopularCourse= async()=>{
-  const response=await api.get('/api/courses/popular')
+  const response=await api.get('/api/course/popular')
   return response.data;
-}
 
+}
 
 export const getAllCourse=async()=>{
   const response=await api.get('/api/courses');
+  return response.data;
   
+}
+
+export const logout=async()=>{
+  localStorage.removeItem('token');
+  localStorage.removeItem('user')
 }
 export default api;

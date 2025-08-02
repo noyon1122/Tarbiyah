@@ -1,7 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import logo from '../assets/images/logo.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import useAuth from '../hooks/useAuth';
+
 const Navbar = () => {
+  const {user,logout}=useAuth();
+  const navigate=useNavigate();
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
   return (
     <div className="flex items-center justify-between font-fredoka bg-base-100 shadow-sm text-lg font-medium container  mx-auto px-4">
   <div>
@@ -31,7 +39,20 @@ const Navbar = () => {
   </div>
 
  <div className="mr-10 text-right">
-    <Link to="/login"><button type="button" className="text-white bg-cyan-600 hover:bg-cyan-700   rounded-full text-1xl  px-10 py-1 text-center me-2 mb-2 ">LogIn</button></Link>
+   {user ? (
+          <button
+            onClick={handleLogout}
+            className="text-white bg-cyan-500 hover:bg-cyan-600 rounded-full px-8 py-1 text-center"
+          >
+            Logout
+          </button>
+        ) : (
+          <Link to="/login">
+            <button className="text-white bg-cyan-600 hover:bg-cyan-700 rounded-full px-10 py-1 text-center">
+              Login
+            </button>
+          </Link>
+        )}
   </div>
 </div>
 

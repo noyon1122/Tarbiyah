@@ -4,7 +4,6 @@ import PopularCourseCard from './PopularCourseCard'
 
 const PopularCourse = () => {
     const [popularCourse,setPopularCourse]=useState([])
-
      useEffect(()=>{
             const getAllPopularCourse=async()=>{
              try {

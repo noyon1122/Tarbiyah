@@ -28,20 +28,20 @@ public class UserService implements IUserService {
 	}
 	
 	@Override
-	public AuthenticationResponse findTeachers(Role role) {
+	public AuthenticationResponse findUsers(Role role) {
 		
 		AuthenticationResponse response=new AuthenticationResponse();
 		
 		try {
-			List<User> teachers=userRepository.findAllByRole(role);
-			List<UserDTO> teachersDtos=Utils.mapUserListEntityToUserListDTO(teachers);
+			List<User> users=userRepository.findAllByRole(role);
+			List<UserDTO> userDtos=Utils.mapUserListEntityToUserListDTO(users);
 			response.setStatusCode(200);
-			response.setUserList(teachersDtos);
-			response.setMessage("All Teachers Found Successfully!");
+			response.setUserList(userDtos);
+			response.setMessage("All Users Found Successfully!");
 			
 		} catch (Exception e) {
 			response.setStatusCode(404);
-			response.setMessage("Something went wrong! All teachers not found!!");
+			response.setMessage("Something went wrong! All users not found!!");
 		}
 		return response;
 	}
