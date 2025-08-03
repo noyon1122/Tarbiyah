@@ -16,9 +16,11 @@ import {
 
 import { Search, MoreVertical } from "lucide-react";
 import { Card, CardContent } from "../public/Card";
-import { getTeachers } from "../../services/api";
-
-
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import mehedi from '../../assets/images/mehedi.png'
+import profile from '../../assets/images/profile.png'
+import bg from '../../assets/images/bg.png'
 
 const earningsData = [
   { day: "01", received: 20000, pending: 10000 },
@@ -44,50 +46,21 @@ const studentPieData = [
 
 const COLORS = ["#6d28d9", "#f59e0b"];
 const AdminDashboard = () => {
-  
-  const [teachers,setTeachers]=useState([])
+  const {user,logout,teachers,totalStudent,totalTeacher}=useAuth();
+  const navigate=useNavigate();
 
-  useEffect(()=>{
-
-    const getAllTeachers=async()=>{
-      const teacherList=await getTeachers();
-      const allTeacher=teacherList.userList;
-      setTeachers(allTeacher);
-    }
-     getAllTeachers();
-  },[]);
-console.log(teachers)
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+console.log("From admin dashboard",teachers)
   return (
-     <div className="grid grid-cols-1 md:grid-cols-4 min-h-screen bg-[#f9f8fc]">
-      {/* Sidebar */}
-      <aside className="bg-white border-r md:col-span-1 p-6">
-        <nav className="space-y-4">
-          {[
-            "Dashboard",
-            "Presence",
-            "Communication",
-            "Event",
-            "Payment",
-            "Pedagogy",
-            "Message",
-            "Settings",
-          ].map((item) => (
-            <div
-              key={item}
-              className={`hover:text-purple-600 text-gray-600 ${
-                item === "Dashboard" ? "text-purple-600 font-semibold" : ""
-              }`}
-            >
-              {item}
-            </div>
-          ))}
-          <div className="mt-10 text-gray-500">Log out</div>
-        </nav>
-      </aside>
-
+   <div className="space-y-6">
+      
+   
       {/* Main content */}
-      <main className="md:col-span-3 p-6 space-y-6">
-        <div className="flex justify-between items-center">
+
+        <div className="flex justify-between items-center ">
           <h1 className="text-2xl font-semibold">Dashboard</h1>
           <div className="flex items-center gap-2">
             <input className="w-72" placeholder="Search" />
@@ -98,25 +71,25 @@ console.log(teachers)
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Card className="bg-blue-50">
             <CardContent className="p-4">
-              <div className="text-sm text-gray-500">Total Students</div>
-              <div className="text-2xl font-bold">2,468</div>
+              <div className="text-2xl font-medium text-gray-500">Total Students</div>
+              <div className="text-2xl font-bold">{totalStudent}</div>
             </CardContent>
           </Card>
           <Card className="bg-purple-50">
             <CardContent className="p-4">
-              <div className="text-sm text-gray-500">Number of Teachers</div>
-              <div className="text-2xl font-bold">245</div>
+              <div className="text-2xl font-medium text-gray-500">Total Teachers</div>
+              <div className="text-2xl font-bold">{totalTeacher}</div>
             </CardContent>
           </Card>
           <Card className="bg-orange-50">
             <CardContent className="p-4">
-              <div className="text-sm text-gray-500">Employees</div>
+              <div className="text-2xl font-medium text-gray-500">Employees</div>
               <div className="text-2xl font-bold">508</div>
             </CardContent>
           </Card>
           <Card className="bg-green-50">
             <CardContent className="p-4">
-              <div className="text-sm text-gray-500">Total Revenue</div>
+              <div className="text-2xl font-medium text-gray-500">Total Revenue</div>
               <div className="text-2xl font-bold">$2,32,468</div>
             </CardContent>
           </Card>
@@ -221,8 +194,7 @@ console.log(teachers)
             </CardContent>
           </Card>
         </div>
-      </main>
-    </div>
+   </div>
   )
 }
 

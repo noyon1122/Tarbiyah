@@ -47,9 +47,13 @@ public class UserService implements IUserService {
 	}
 	
 	@Override
-	public User findByEmail(String email) {
+	public AuthenticationResponse findByEmail(String email) {
+		AuthenticationResponse response=new AuthenticationResponse();
 		
-			return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found with email: " + email));
+		  User user= userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found with email: " + email));
+		  UserDTO userDTO=Utils.mapUserEntityToUserDTO(user);
+		  response.setUser(userDTO);
+			return response; 
 	}
 
 
