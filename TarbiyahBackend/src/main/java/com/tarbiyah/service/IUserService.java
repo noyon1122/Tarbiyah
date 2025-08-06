@@ -9,6 +9,6 @@ import com.tarbiyah.entity.User;
 public interface IUserService {
   
 	AuthenticationResponse findUsers(Role role);
-	AuthenticationResponse findByEmail(String email);
+	User findByEmail(String email);
 	
 }

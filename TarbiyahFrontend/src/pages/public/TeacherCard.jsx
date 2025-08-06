@@ -9,7 +9,7 @@ const TeacherCard = ({ teacher, onClick }) => {
     mobile,
     address,
   } = teacher;
-
+console.log(teacher)
   return (
     <div
       onClick={onClick}

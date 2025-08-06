@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tarbiyah.dto.AuthenticationResponse;
 import com.tarbiyah.entity.Role;
-
+import com.tarbiyah.entity.User;
 import com.tarbiyah.service.Impl.UserService;
 
 @RestController
@@ -35,9 +35,9 @@ public class UserController {
 	}
 	
 	@GetMapping("/users/email")
-	public ResponseEntity<AuthenticationResponse> findUser(@RequestParam String email){
+	public ResponseEntity<User> findUser(@RequestParam String email){
 	
-		AuthenticationResponse response=userService.findByEmail(email);
+		User response=userService.findByEmail(email);
 		
 		return ResponseEntity.ok(response);
 	}

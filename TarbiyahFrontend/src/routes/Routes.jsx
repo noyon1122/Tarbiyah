@@ -18,6 +18,7 @@ import StudentLayout from "../pages/student/StudentLayout";
 import StudentProfile from "../pages/student/StudentProfile";
 import MyHifz from "../pages/student/MyHifz";
 import MyFees from "../pages/student/MyFees";
+import CourseEnroll from "../pages/student/CourseEnroll";
 
 const router=createBrowserRouter([
     {
@@ -68,6 +69,7 @@ const router=createBrowserRouter([
                 { path: "profile", element: <StudentProfile></StudentProfile> },
                 { path: "hifz", element: <MyHifz></MyHifz> },
                 { path: "fees", element: <MyFees /> },
+                { path: "course-enroll", element: <CourseEnroll></CourseEnroll>},
                 // add more nested routes here as needed
                 ],
             },
