@@ -1,22 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import  { getTeachers } from '../../services/api';
+
 import TeacherCard from './TeacherCard';
+import useAuth from '../../hooks/useAuth';
 
 const TeacherList = () => {
-    const [teachers,setTeachers]=useState([]);
-
-    useEffect(()=>{
-        const getAllTeachers=async()=>{
-         try {
-            const response=await getTeachers();
-            const allTeachers=response.userList;
-            setTeachers(allTeachers);
-         } catch (error) {
-            console.error('Error fetching teachers:', error.message);
-         }
-        }
-        getAllTeachers();
-    },[])
+    const {teachers,courses}=useAuth();
 
   return (
     <div className='mx-20 my-10'>
@@ -33,10 +21,20 @@ const TeacherList = () => {
         </div>
 
         <div className='grid grid-cols-3 gap-4'>
-            {
-                teachers.map(teacher => (<TeacherCard key={teacher.id} teacher={teacher}></TeacherCard>))
-            }
-        </div>
+  {
+    teachers.map(teacher => {
+      const course = courses.filter(course => course.teacher?.id === teacher?.id);
+      return (
+        <TeacherCard
+          key={teacher.id}
+          teacher={teacher}
+          course={course[0]}
+        />
+      );
+    })
+  }
+</div>
+
     </div>
   )
 }

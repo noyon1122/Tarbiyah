@@ -8,5 +8,5 @@ import com.tarbiyah.entity.User;
 public interface IEnrollmentService {
 
 	List<Enrollment> findByStudent(User student);
-	
+	Enrollment enrollCourse(Long studentId,Long courseId);
 }

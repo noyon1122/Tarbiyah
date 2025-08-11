@@ -9,4 +9,5 @@ public interface ICourseService {
 	public Course createCourse(Course course);
 	public List<Course> getAllCourse();
 	public List<Course> getPopularCourse();
+	public Course findById(Long id);
 }

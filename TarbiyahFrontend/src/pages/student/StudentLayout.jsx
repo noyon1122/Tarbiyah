@@ -41,8 +41,8 @@ const StudentLayout = () => {
            <div className='flex items-center hover:text-cyan-600 gap-2'><TbListCheck /><Link to="/student/attendence" className="hover:text-cyan-600 font-medium block">My Attendence</Link></div>  
            <div className='flex items-center hover:text-cyan-600 gap-2'><GiMoneyStack /><Link to="/student/fees" className="hover:text-cyan-600 font-medium block">My Fees</Link></div> 
            <div className='flex items-center hover:text-cyan-600 gap-2'><BiUserCheck /> <Link to="/student/course-enroll" className="hover:text-cyan-600 font-medium block">Enrolled Course</Link></div> 
-           <div className='flex items-center hover:text-cyan-600 gap-2'><BiBookReader /><Link to="/student/course-active" className="hover:text-cyan-600 font-medium block">Active Course</Link></div> 
-           <div className='flex items-center hover:text-cyan-600 gap-2'><BsCheckCircle /><Link to="/student/course-complete" className="hover:text-cyan-600 font-medium block">Completed Course</Link></div> 
+           <div className='flex items-center hover:text-cyan-600 gap-2'><BiBookReader /><Link to="/student/whislist" className="hover:text-cyan-600 font-medium block">WhisList</Link></div> 
+           {/* <div className='flex items-center hover:text-cyan-600 gap-2'><BsCheckCircle /><Link to="/student/course-complete" className="hover:text-cyan-600 font-medium block"></Link></div>  */}
            <div className='flex items-center hover:text-cyan-600 gap-2'><IoSettingsOutline /><Link to="/student/settings" className="hover:text-cyan-600 font-medium block">Settings</Link></div> 
 
             <div className="mt-10 text-gray-500 font-medium">

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ import com.tarbiyah.service.Impl.CourseService;
 import com.tarbiyah.service.Impl.UserService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/courses")
 
 public class CourseController {
 
@@ -30,7 +31,7 @@ public class CourseController {
 		this.userService = userService;
 	}
 
-	@PostMapping("/courses/create")
+	@PostMapping("/create")
 	public ResponseEntity<Course> createCourse(@RequestBody Course course,Principal principal)
 	{
 		User admin=userService.findByEmail(principal.getName());
@@ -42,15 +43,21 @@ public class CourseController {
         return ResponseEntity.ok(saved);
 	}
 	
-	@GetMapping("/course/popular")
+	@GetMapping("/popular")
 	public ResponseEntity<List<Course>> getPopularCourse(){
 		List<Course> courseList=courseService.getPopularCourse();
 		return ResponseEntity.ok(courseList);
 	}
 	
-	@GetMapping("/courses")
+	@GetMapping("")
 	public ResponseEntity<List<Course>> getAllCourse(){
 		List<Course> allCourse=courseService.getAllCourse();
 		return ResponseEntity.ok(allCourse);
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<Course> getCourse(@PathVariable Long id){
+		Course course=courseService.findById(id);
+		return ResponseEntity.ok(course);
 	}
 }

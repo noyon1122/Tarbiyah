@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tarbiyah.dto.AuthenticationResponse;
 import com.tarbiyah.dto.LoginRequest;
 import com.tarbiyah.entity.User;
+import com.tarbiyah.service.IAuthService;
 import com.tarbiyah.service.Impl.AuthService;
 
 
@@ -16,7 +17,7 @@ import com.tarbiyah.service.Impl.AuthService;
 @RequestMapping("/auth")
 public class AuthController {
 
-	private final AuthService authService;
+	private final IAuthService authService;
 
 	public AuthController(AuthService authService) {
 		super();

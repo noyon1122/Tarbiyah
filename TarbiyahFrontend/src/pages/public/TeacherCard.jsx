@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TeacherCard = ({ teacher, onClick }) => {
+const TeacherCard = ({ teacher,course, onClick }) => {
   const {
     firstName,
     lastName,
@@ -9,7 +9,8 @@ const TeacherCard = ({ teacher, onClick }) => {
     mobile,
     address,
   } = teacher;
-console.log(teacher)
+ 
+ console.log(course?.title)
   return (
     <div
       onClick={onClick}
@@ -29,9 +30,9 @@ console.log(teacher)
         <p className="text-sm text-gray-500">{address}</p>
         <div className="mt-3">
           <p className="text-sm font-medium text-cyan-800">
-            Subject: Tajweed & Qur’an Recitation
+            Subject: {course?.title}
           </p>
-          <p className="text-sm text-gray-700 mt-1">Specializes in teaching Qur’an with proper Tajweed and Makharij, with over 8 years of experience.</p>
+          <p className="text-sm text-gray-700 mt-1">{course?.description}</p>
         </div>
       </div>
     </div>

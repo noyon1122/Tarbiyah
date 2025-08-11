@@ -3,7 +3,9 @@ package com.tarbiyah.util;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.tarbiyah.dto.EnrollmentRequest;
 import com.tarbiyah.dto.UserDTO;
+import com.tarbiyah.entity.Enrollment;
 import com.tarbiyah.entity.User;
 
 public class Utils {
@@ -27,5 +29,12 @@ public class Utils {
 	
 	public static List<UserDTO> mapUserListEntityToUserListDTO(List<User>userList){
 		return userList.stream().map(Utils::mapUserEntityToUserDTO).collect(Collectors.toList());
+	}
+	
+	public static EnrollmentRequest mapEnrollmentRequestToEnrollment(Enrollment enrollment) {
+		EnrollmentRequest enrollmentRequest=new EnrollmentRequest();
+		enrollment.setStudent(enrollment.getStudent());
+		enrollmentRequest.setCourse(enrollmentRequest.getCourse());
+		return enrollmentRequest;
 	}
 }

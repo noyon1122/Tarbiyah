@@ -19,6 +19,7 @@ import StudentProfile from "../pages/student/StudentProfile";
 import MyHifz from "../pages/student/MyHifz";
 import MyFees from "../pages/student/MyFees";
 import CourseEnroll from "../pages/student/CourseEnroll";
+import CourseDetails from "../pages/public/CourseDetails";
 
 const router=createBrowserRouter([
     {
@@ -49,6 +50,10 @@ const router=createBrowserRouter([
             {
                 path:'/courses',
                 element:<Courses></Courses>
+            },
+            {
+              path: "/courses/:id",
+              element:<CourseDetails></CourseDetails>
             },
             {
                 path: "/admin",

@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { getTeachers, getStudents } from '../services/api'; // make sure you have getStudents API function
+import { getTeachers, getStudents, getAllCourse } from '../services/api'; // make sure you have getStudents API function
 
 export const AuthContext = createContext(null);
 
@@ -7,6 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [teachers, setTeachers] = useState([]);
   const [students, setStudents] = useState([]);
+  const [courses, setCourses] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -41,9 +42,21 @@ export const AuthProvider = ({ children }) => {
         setStudents([]);
       }
     };
+    
+    const fetchCourses =async () =>{
+      try {
+        const allCourse= await getAllCourse();
+        setCourses(allCourse || []);
+
+      } catch (error) {
+        console.error("Failed to fetch courses", err);
+        setCourses([]);
+      }
+    }
 
     fetchTeachers();
     fetchStudents();
+    fetchCourses();
   }, []);
 
   const login = (token, user) => {
@@ -59,7 +72,6 @@ export const AuthProvider = ({ children }) => {
   };
   const totalStudent=students.length;
   const totalTeacher=teachers.length;
- 
   const authInfo = {
     user,
     setUser,
@@ -68,7 +80,8 @@ export const AuthProvider = ({ children }) => {
     teachers,
     students,
     totalStudent,
-    totalTeacher
+    totalTeacher,
+    courses
   };
 
   return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;

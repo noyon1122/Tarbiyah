@@ -31,6 +31,11 @@ export const loginApi = async (loginData) => {
   return { token: token, user: response.data.user };
 };
 
+export const logout=async()=>{
+  localStorage.removeItem('token');
+  localStorage.removeItem('user')
+}
+
 export const getTeachers=async()=>{
   const response=await api.get('/api/users?role=TEACHER');
   return response.data;
@@ -42,7 +47,7 @@ export const getStudents=async()=>{
 }
 
 export const getPopularCourse= async()=>{
-  const response=await api.get('/api/course/popular')
+  const response=await api.get('/api/courses/popular')
   return response.data;
 
 }
@@ -53,8 +58,10 @@ export const getAllCourse=async()=>{
   
 }
 
-export const logout=async()=>{
-  localStorage.removeItem('token');
-  localStorage.removeItem('user')
+export const getCourseById=async(id)=>{
+const response = await api.get(`/api/courses/${id}`);
+  return response.data;
 }
+
+
 export default api;

@@ -14,6 +14,7 @@ import com.tarbiyah.entity.User;
 
 public interface CourseRepository extends JpaRepository<Course, Long> {
 
+	Optional<Course>findById(Long id);
 	Optional<Course>findByTeacher(User teacher);
 	
 	//show popular course
