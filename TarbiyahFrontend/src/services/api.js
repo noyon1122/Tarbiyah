@@ -5,7 +5,7 @@ const api=axios.create({
     baseURL:'http://localhost:8080',
 })
 
-axios.interceptors.request.use((config) => {
+api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   console.log("JWT token:", token);
   if (token) {
@@ -62,6 +62,12 @@ export const getCourseById=async(id)=>{
 const response = await api.get(`/api/courses/${id}`);
   return response.data;
 }
+
+export const getEnrolledCourses = async () => {
+  const response = await api.get('/api/enrolls'); // api is your axios instance with JWT token
+  return response.data;
+};
+
 
 
 export default api;

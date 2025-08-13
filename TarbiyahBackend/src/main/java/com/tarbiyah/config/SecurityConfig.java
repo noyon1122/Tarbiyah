@@ -45,7 +45,7 @@ public class SecurityConfig {
 						.requestMatchers("/auth/**","/api/users","/api/courses/popular","/api/courses/**").permitAll()
 						.requestMatchers("/admin/**","/api/courses/create").hasRole("ADMIN")
 						.requestMatchers("/teachers/**").hasAnyRole("ADMIN","TEACHER")
-						.requestMatchers("/students/**","/api/enroll").hasAnyRole("ADMIN","TEACHER","STUDENT")
+						.requestMatchers("/students/**","/api/enrolls").hasAnyRole("ADMIN","TEACHER","STUDENT")
 						.anyRequest().authenticated()
 						
 						)

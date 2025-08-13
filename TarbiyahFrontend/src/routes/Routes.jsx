@@ -20,6 +20,7 @@ import MyHifz from "../pages/student/MyHifz";
 import MyFees from "../pages/student/MyFees";
 import CourseEnroll from "../pages/student/CourseEnroll";
 import CourseDetails from "../pages/public/CourseDetails";
+import Enroll from "../pages/public/Enroll";
 
 const router=createBrowserRouter([
     {
@@ -54,6 +55,10 @@ const router=createBrowserRouter([
             {
               path: "/courses/:id",
               element:<CourseDetails></CourseDetails>
+            },
+             {
+                path:'courses/:id/enroll',
+                element: <Enroll></Enroll>
             },
             {
                 path: "/admin",
